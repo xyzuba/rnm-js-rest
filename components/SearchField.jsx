@@ -42,12 +42,12 @@ export const SearchField = () => {
   const handleClickOutside = (e) => {
     const { current: wrap } = wrapperRef;
     if (wrap && !wrap.contains(e.target)) {
-      setDisplay(false);
+      toggleDropdown(false);
     }
   };
 
   return (
-    <Box position="relative">
+    <Box position="relative" ref={wrapperRef}>
       <TextField
         id="outlined-basic"
         label="Find character"
