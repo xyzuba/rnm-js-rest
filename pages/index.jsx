@@ -1,9 +1,10 @@
-import { Box, Grid, Autocomplete, TextField, Button } from "@mui/material";
+import { Button, Box, Grid, Autocomplete, TextField } from "@mui/material";
 import { useEffect, useState, useCallback } from "react";
 import NextLink from "next/link";
 import axios from "axios";
 import { Text } from "../components/Text";
-import { LikeCont } from "../components/LikeCont";
+import { useRouter } from "next/router";
+
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
@@ -14,6 +15,18 @@ export const style = {
   alignItems: "center",
   justifyContent: "center",
   padding: "4rem",
+};
+const btnStyle = {
+  position: "absolute",
+  top: "5%",
+  left: "5%",
+};
+const loading = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  fontSize: "25px",
 };
 
 export default function Home() {
@@ -80,6 +93,11 @@ export default function Home() {
 
   return (
     <div style={style}>
+      <NextLink href="/liked">
+        <Button variant="text" style={btnStyle}>
+          Liked
+        </Button>
+      </NextLink>
       <Box
         width={"70%"}
         display="flex"
@@ -101,7 +119,7 @@ export default function Home() {
         />
         <Grid container spacing={4} marginTop={2}>
           {chars.length === 0 ? (
-            <div>Loading...</div>
+            <div style={loading}>Loading...</div>
           ) : (
             chars.map((c) => (
               <Grid
@@ -121,7 +139,6 @@ export default function Home() {
                     <Text text={c.status} fieldName={"Status: "} />
                   </Box>
                 </NextLink>
-                {/* <LikeCont /> */}
                 <Box
                   height={"2rem"}
                   width="100%"

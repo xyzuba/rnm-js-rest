@@ -17,6 +17,13 @@ const btnStyle = {
   top: "5%",
   left: "5%",
 };
+const loading = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  fontSize: "25px",
+};
 
 const Character = () => {
   const router = useRouter();
@@ -61,7 +68,7 @@ const Character = () => {
         Go Back
       </Button>
       {routeId === -1 ? (
-        <div>Loading...</div>
+        <div style={loading}>Loading...</div>
       ) : (
         <Box
           width="70%"
