@@ -2,28 +2,8 @@ import { Box, Typography, Button } from "@mui/material";
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { useGetData } from "../../hooks/useGetData";
 import { Text } from "../../components/Text";
-
-const charPage = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  padding: "4rem",
-};
-
-const btnStyle = {
-  position: "absolute",
-  top: "5%",
-  left: "5%",
-};
-const loading = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  fontSize: "25px",
-};
+import { btnStyle, charPage, loading } from "../../styles/styles";
 
 const Character = () => {
   const router = useRouter();
@@ -60,8 +40,6 @@ const Character = () => {
     }
   }, [char]);
 
-  //   console.log(episodes.map((e) => e.name));
-
   return (
     <div style={charPage}>
       <Button variant="text" style={btnStyle} onClick={() => router.back()}>
@@ -79,14 +57,6 @@ const Character = () => {
         >
           <img src={char.image} />
           <Box>
-            {/* <Typography fontSize={22} mt={2}>
-              <span style={spanStyle}>Name: </span>
-              {char.name}
-            </Typography>
-            <Typography fontSize={18} mt={2}>
-              <span style={spanStyle}>Species: </span>
-              {char.species}
-            </Typography> */}
             <Text text={char.name} fieldName={"Name"} />
             <Text text={char.species} fieldName={"Species"} />
             <Text text={char.gender} fieldName={"Gender"} />

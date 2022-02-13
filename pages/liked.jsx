@@ -4,25 +4,7 @@ import { Box, Grid, Button } from "@mui/material";
 import { Text } from "../components/Text";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-
-export const style = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  padding: "4rem",
-};
-const btnStyle = {
-  position: "absolute",
-  top: "5%",
-  left: "5%",
-};
-const loading = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  fontSize: "25px",
-};
+import { btnStyle, charPage, loading } from "../../styles/styles";
 
 const liked = () => {
   const router = useRouter();
@@ -42,15 +24,10 @@ const liked = () => {
           setChars(res.data);
         });
     }
-    // console.log(chars);
   }, [liked]);
-  //   console.log(liked);
-  //   if (typeof window !== "undefined") {
-  //     arrId = JSON.parse(localStorage.getItem("liked"));
-  //   }
 
   return (
-    <div style={style}>
+    <div style={charPage}>
       <Button variant="text" style={btnStyle} onClick={() => router.back()}>
         Go Back
       </Button>
