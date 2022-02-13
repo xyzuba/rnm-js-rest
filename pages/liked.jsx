@@ -4,7 +4,7 @@ import { Box, Grid, Button } from "@mui/material";
 import { Text } from "../components/Text";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import { btnStyle, charPage, loading } from "../../styles/styles";
+import { btnStyle, charPage, loading } from "../utils/styles";
 
 const liked = () => {
   const router = useRouter();
@@ -20,7 +20,6 @@ const liked = () => {
       axios
         .get(`https://rickandmortyapi.com/api/character/${liked}`)
         .then((res) => {
-          console.log(res.data);
           setChars(res.data);
         });
     }

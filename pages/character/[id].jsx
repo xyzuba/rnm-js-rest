@@ -3,7 +3,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Text } from "../../components/Text";
-import { btnStyle, charPage, loading } from "../../styles/styles";
+import { btnStyle, charPage, loading } from "../../utils/styles";
 
 const Character = () => {
   const router = useRouter();
@@ -66,7 +66,6 @@ const Character = () => {
             />
             <Text text={char.status} fieldName={"Status"} />
             <Text text={char.created} fieldName={"Created"} />
-            {/* <Box>{char.episode.map((e) => e)}</Box> */}
           </Box>
           <Typography fontSize={24} my={2}>
             Episodes:{" "}

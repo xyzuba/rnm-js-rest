@@ -3,11 +3,12 @@ import { useEffect, useState, useCallback } from "react";
 import NextLink from "next/link";
 import axios from "axios";
 import { Text } from "../components/Text";
-import { btnStyle, charPage, loading } from "../../styles/styles";
+import { btnStyle, charPage, loading } from "../utils/styles";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
+import { SearchField } from "../components/SearchField";
 
 export default function Home() {
   const [chars, setChars] = useState([]);
@@ -25,8 +26,6 @@ export default function Home() {
       localStorage.setItem("liked", []);
     }
   }, []);
-
-  //https://rickandmortyapi.com/api/character/?name=
 
   useEffect(async () => {
     let charArr = [];
@@ -67,12 +66,12 @@ export default function Home() {
         </Button>
       </NextLink>
       <Box
-        width={"70%"}
+        width={"70vw"}
         display="flex"
         flexDirection={"column"}
         alignItems="center"
       >
-        <Autocomplete
+        {/* <Autocomplete
           disablePortal
           id="combo-box-demo"
           options={chars && chars.map((c) => c.name)}
@@ -83,8 +82,9 @@ export default function Home() {
               label="Character"
               onClick={() => console.log(params)}
             />
-          )}
-        />
+          )} */}
+        <SearchField />
+
         <Grid container spacing={4} marginTop={2}>
           {chars.length === 0 ? (
             <div style={loading}>Loading...</div>
@@ -98,11 +98,11 @@ export default function Home() {
                 borderRadius={4}
                 padding={3}
                 margin={2}
-                width={390}
+                width={"32vw"}
               >
                 <NextLink href={"/character/[id]"} as={`/character/${c.id}`}>
                   <Box style={{ cursor: "pointer" }}>
-                    <img src={c.image} />
+                    <img src={c.image} style={{ width: "25vw" }} />
                     <Text text={c.name} fieldName={"Name: "} />
                     <Text text={c.status} fieldName={"Status: "} />
                   </Box>
