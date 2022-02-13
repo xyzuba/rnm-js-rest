@@ -5,9 +5,19 @@ import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 
-export const LikeCont = () => {
+export const LikeCont = (props) => {
   const [like, setLike] = useState(false);
   const [dislike, setDislike] = useState(false);
+
+  let localState = [];
+
+  localState =
+    typeof localStorage !== "undefined"
+      ? JSON.parse(localStorage.getItem("liked"))
+      : [];
+
+  const likeFunc = (arr, id) => arr.push(id);
+  const dislikeFunc = (arr, id) => arr.filter(id);
 
   return (
     <Box
@@ -25,6 +35,7 @@ export const LikeCont = () => {
         onClick={() => {
           setLike(!like);
           setDislike(false);
+          likeFunc(props.arr, props.id);
         }}
       >
         {like ? <ThumbUpAltIcon /> : <ThumbUpOffAltIcon />}
@@ -34,6 +45,7 @@ export const LikeCont = () => {
         onClick={() => {
           setDislike(!dislike);
           setLike(false);
+          dislikeFunc(props.arr, props.id);
         }}
       >
         {dislike ? <ThumbDownAltIcon /> : <ThumbDownOffAltIcon />}

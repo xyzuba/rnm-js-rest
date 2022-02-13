@@ -4,6 +4,10 @@ import NextLink from "next/link";
 import axios from "axios";
 import { Text } from "../components/Text";
 import { LikeCont } from "../components/LikeCont";
+import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
+import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
+import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
+import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 
 export const style = {
   display: "flex",
@@ -18,6 +22,28 @@ export default function Home() {
 
   const [like, setLike] = useState(false);
   const [dislike, setDislike] = useState(false);
+
+  const [likedChars, setLikeChars] = useState([]);
+
+  // if (typeof window !== "undefined") {
+  //   setLikeChars(JSON.parse(localStorage.getItem("liked")));
+
+  //   // localState = JSON.parse(localStorage.getItem("liked"));
+
+  //   console.log(likedChars);
+  // }
+
+  useEffect(() => {
+    if (localStorage.getItem("liked")) {
+      setLikeChars(JSON.parse(localStorage.getItem("liked")));
+    } else {
+      localStorage.setItem("liked", []);
+    }
+  }, []);
+
+  // useEffect(() => {
+  //   localStorage.setItem("liked", JSON.stringify(likedChars));
+  // }, [likedChars]);
 
   //https://rickandmortyapi.com/api/character/?name=
 
@@ -95,7 +121,48 @@ export default function Home() {
                     <Text text={c.status} fieldName={"Status: "} />
                   </Box>
                 </NextLink>
-                <LikeCont />
+                {/* <LikeCont /> */}
+                <Box
+                  height={"2rem"}
+                  width="100%"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="space-around"
+                  borderTop="1px solid grey"
+                  paddingTop={"1rem"}
+                  marginTop={"1rem"}
+                >
+                  <Box
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      let localState = likedChars;
+                      setLike(!like);
+                      setDislike(false);
+                      localState.push(c.id);
+                      localStorage.setItem("liked", JSON.stringify(localState));
+                      setLikeChars(localState);
+                    }}
+                  >
+                    {likedChars.includes(c.id) ? (
+                      <ThumbUpAltIcon />
+                    ) : (
+                      <ThumbUpOffAltIcon />
+                    )}
+                  </Box>
+                  <Box
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      let localState = likedChars.filter((e) => e !== c.id);
+                      // setDislike(!dislike);
+                      // setLike(false);
+
+                      localStorage.setItem("liked", JSON.stringify(localState));
+                      setLikeChars(localState);
+                    }}
+                  >
+                    {dislike ? <ThumbDownAltIcon /> : <ThumbDownOffAltIcon />}
+                  </Box>
+                </Box>
               </Grid>
             ))
           )}
